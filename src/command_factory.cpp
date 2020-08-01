@@ -2,8 +2,8 @@
 
 namespace vigenere
 {
-Command GetCommand(int argc, char *argv[])
+HelpCommand GetCommand(int argc, char *argv[])
 {
-
+    return {};
 }
 }
