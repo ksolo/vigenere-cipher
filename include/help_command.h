@@ -5,6 +5,10 @@ namespace vigenere
 {
 class HelpCommand
 {
+private:
+    void EncipherHelp();
+    void DecipherHelp();
+
 public:
     void Execute();
 };
