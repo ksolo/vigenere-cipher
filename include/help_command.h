@@ -1,16 +1,19 @@
 #ifndef HELP_COMMAND_H
 #define HELP_COMMAND_H
 
+#include "command.h"
+
 namespace vigenere
 {
-class HelpCommand
+class HelpCommand : public Command
 {
 private:
     void EncipherHelp();
     void DecipherHelp();
 
 public:
-    void Execute();
+    ~HelpCommand() override {};
+    void Execute() override;
 };
 }
 

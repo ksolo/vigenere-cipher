@@ -3,8 +3,8 @@
 
 int main(int argc, char *argv[])
 {
-  vigenere::HelpCommand command = vigenere::GetCommand(argc, argv);
-  command.Execute();
+  std::unique_ptr<vigenere::Command> command = vigenere::GetCommand(argc, argv);
+  command->Execute();
 
   return 0;
 }

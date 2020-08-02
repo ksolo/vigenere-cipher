@@ -31,7 +31,18 @@ $ make
 From the `build/` directory you can execute the program with the following command.
 
 ```sh
-./vigenere
+$ ./vigenere
 ```
 
-With no arguments you will be provided the help text.
+With no arguments or with the help command you will be provided with examples on the application.
+
+## Enchipher
+
+To encipher a file you must provide a key to use for encryption. To limit scope of the program
+only alphabetic letters should be used. If spaces are part of your key wrap the key in quotes.
+
+```sh
+$ ./vigenere encipher "this is my key" file.txt
+```
+
+The resulting output will be in a file `file.enc.txt`.

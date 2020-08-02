@@ -1,14 +1,14 @@
 #ifndef COMMAND_FACTORY_H
 #define COMMAND_FACTORY_H
 
-#include "help_command.h"
+#include <memory>
+
+#include "command.h"
 
 namespace vigenere
 {
-// forward declaration
-class Command;
 
-HelpCommand GetCommand(int argc, char *argv[]);
+std::unique_ptr<Command> GetCommand(int argc, char *argv[]);
 
 }
 

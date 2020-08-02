@@ -6,8 +6,9 @@ set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 
 add_executable(vigenere
     src/main.cpp
-    src/help_command.cpp
     src/command_factory.cpp
+    src/encipher_command.cpp
+    src/help_command.cpp
 )
 
 target_include_directories(vigenere PUBLIC include)
