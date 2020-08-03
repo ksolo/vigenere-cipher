@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <vector>
 
 #include "command_factory.h"
 #include "encipher_command.h"
@@ -14,10 +15,18 @@ std::unique_ptr<Command> GetCommand(int argc, char *argv[])
     const std::string decipher = "decipher";
     const std::string help = "help";
 
-    if (argc >= 2)
+    if (argc >= 3)
     {
         const std::string command(argv[1]);
-        if (command == encipher) { return std::make_unique<EncipherCommand>(); }
+        const std::string key(argv[2]);
+        std::vector<std::string> files;
+
+        for (int i=3; i < argc; i++)
+        {
+            files.emplace_back(std::string(argv[i]));
+        }
+
+        if (command == encipher) { return std::make_unique<EncipherCommand>(key, files); }
     }
     return std::make_unique<HelpCommand>();
 }
