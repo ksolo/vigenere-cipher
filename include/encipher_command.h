@@ -17,6 +17,7 @@ public:
     void Execute() override;
 private:
     Key _key;
+    void EncipherFiles(const std::vector<std::string> &files);
 };
 }
 

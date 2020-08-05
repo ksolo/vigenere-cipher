@@ -1,6 +1,8 @@
 #include "encipher_command.h"
 
+#include <future>
 #include <iostream>
+#include <thread>
 
 namespace vigenere
 {
@@ -18,5 +20,22 @@ void EncipherCommand::Execute()
 {
     std::cout << "enciphering file..." << std::endl;
     std::cout << "finished file" << std::endl;
+}
+
+void EncipherCommand::EncipherFiles(const std::vector<std::string> &files)
+{
+    std::vector<std::future<void>> futures;
+    for (auto &&file: files)
+    {
+        futures.emplace_back(std::async([&](){
+            std::cout << _key.NormalizedKey() << std::endl;
+            std::cout << file << std::endl;
+        }));
+    }
+
+    for (auto &ftr : futures)
+    {
+        ftr.wait();
+    }
 }
 }
