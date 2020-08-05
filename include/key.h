@@ -14,6 +14,9 @@ public:
     // getters
     std::string NormalizedKey() const;
 
+    // methods
+    int Size() const;
+
 private:
     const std::string &_raw_key;
     std::string _normalized_key;

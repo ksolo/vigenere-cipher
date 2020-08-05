@@ -15,4 +15,9 @@ namespace vigenere
     {
         return _normalized_key;
     }
+
+    int Key::Size() const
+    {
+        return _normalized_key.size();
+    }
 } // namespace vigenere
