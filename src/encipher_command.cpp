@@ -4,9 +4,9 @@
 
 namespace vigenere
 {
-EncipherCommand::EncipherCommand(const std::string &key, const std::vector<std::string> &files)
+EncipherCommand::EncipherCommand(const std::string &key, const std::vector<std::string> &files): _key(key)
 {
-    std::cout << key << std::endl;
+    std::cout << _key.NormalizedKey() << std::endl;
     std::cout << "files: " << std::endl;
     for (auto file : files)
     {
