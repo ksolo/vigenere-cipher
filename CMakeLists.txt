@@ -9,6 +9,7 @@ add_executable(vigenere
     src/command_factory.cpp
     src/encipher_command.cpp
     src/help_command.cpp
+    src/key.cpp
 )
 
 target_include_directories(vigenere PUBLIC include)
