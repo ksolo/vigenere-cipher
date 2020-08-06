@@ -6,36 +6,30 @@
 
 namespace vigenere
 {
-EncipherCommand::EncipherCommand(const std::string &key, const std::vector<std::string> &files): _key(key)
-{
-    std::cout << _key.NormalizedKey() << std::endl;
-    std::cout << "files: " << std::endl;
-    for (auto file : files)
-    {
-        std::cout << file << std::endl;
-    }
-}
+EncipherCommand::EncipherCommand(const std::string &key, std::vector<std::string> files): _key(key), _files(files) {}
 
 void EncipherCommand::Execute()
 {
-    std::cout << "enciphering file..." << std::endl;
-    std::cout << "finished file" << std::endl;
+    EncipherFiles();
 }
 
-void EncipherCommand::EncipherFiles(const std::vector<std::string> &files)
+void EncipherCommand::EncipherFiles()
 {
     std::vector<std::future<void>> futures;
-    for (auto &&file: files)
+    for (auto file : _files)
     {
-        futures.emplace_back(std::async([&](){
+
+        futures.emplace_back(std::async([&](std::string file){
             std::cout << _key.NormalizedKey() << std::endl;
             std::cout << file << std::endl;
-        }));
+        }, file));
     }
 
     for (auto &ftr : futures)
     {
         ftr.wait();
     }
+
+    std::cout << "futures completed" << std::endl;
 }
 }

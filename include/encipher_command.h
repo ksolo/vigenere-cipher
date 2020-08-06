@@ -12,12 +12,14 @@ namespace vigenere
 class EncipherCommand : public Command
 {
 public:
-    EncipherCommand(const std::string &key, const std::vector<std::string> &files);
+    EncipherCommand(const std::string &key, std::vector<std::string> files);
     ~EncipherCommand() override {};
     void Execute() override;
 private:
     Key _key;
-    void EncipherFiles(const std::vector<std::string> &files);
+    std::vector<std::string> _files;
+
+    void EncipherFiles();
 };
 }
 
