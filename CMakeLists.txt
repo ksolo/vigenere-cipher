@@ -10,6 +10,7 @@ add_executable(vigenere
     src/encipher_command.cpp
     src/help_command.cpp
     src/key.cpp
+    src/vigenere_cipher_strategy.cpp
 )
 
 target_include_directories(vigenere PUBLIC include)
