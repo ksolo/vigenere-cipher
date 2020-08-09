@@ -34,6 +34,7 @@ private:
     std::fstream _output_file;
 
     void encipher_line(const std::string &line);
+    void report();
     char shift(char letter);
     // TODO: use mutex to protext
 };

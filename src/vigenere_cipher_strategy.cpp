@@ -32,8 +32,10 @@ void VigenereCipherStrategy::Encipher()
             encipher_line(line);
         }
     } else {
-        std::cout << "input file was not found" << std::endl;
+        std::cout << "input file: " << _input_filename << " was not found" << std::endl;
+        return;
     }
+    report();
 }
 
 void VigenereCipherStrategy::encipher_line(const std::string &line)
@@ -68,5 +70,13 @@ char VigenereCipherStrategy::shift(char letter)
 
     if (shifted_char > alphabet_end) return shifted_char - alphabet_size;
     return shifted_char;
+}
+
+void VigenereCipherStrategy::report()
+{
+    std::cout << "File: " << _input_filename << " has been enchiphered." << std::endl;
+    std::cout << "Characters Skipped: " << _skipped_characters_count << std::endl;
+    std::cout << "Characters Passed Through: " << _passthrough_characters_count << std::endl;
+    std::cout << "Characters Enciphered: " << _enciphered_characters_count << std::endl;
 }
 }
