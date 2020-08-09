@@ -32,6 +32,7 @@ void VigenereCipherStrategy::Encipher()
             encipher_line(line);
         }
     } else {
+        std::lock_guard<std::mutex> lck(_mtx);
         std::cout << "input file: " << _input_filename << " was not found" << std::endl;
         return;
     }
@@ -51,7 +52,6 @@ void VigenereCipherStrategy::encipher_line(const std::string &line)
         }
         else if (isalpha(letter))
         {
-            char shifted_char = shift(letter);
             enciphered_line += shift(letter);
         }
         else {
@@ -74,6 +74,7 @@ char VigenereCipherStrategy::shift(char letter)
 
 void VigenereCipherStrategy::report()
 {
+    std::lock_guard<std::mutex> lck(_mtx);
     std::cout << "File: " << _input_filename << " has been enchiphered." << std::endl;
     std::cout << "Characters Skipped: " << _skipped_characters_count << std::endl;
     std::cout << "Characters Passed Through: " << _passthrough_characters_count << std::endl;

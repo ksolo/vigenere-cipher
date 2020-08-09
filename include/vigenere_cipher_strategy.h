@@ -29,6 +29,7 @@ private:
     int _skipped_characters_count {0};
 
     Key _key;
+    std::mutex _mtx;
     std::string &_input_filename;
     std::fstream _input_file;
     std::fstream _output_file;
@@ -36,7 +37,6 @@ private:
     void encipher_line(const std::string &line);
     void report();
     char shift(char letter);
-    // TODO: use mutex to protext
 };
 }
 #endif
