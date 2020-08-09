@@ -12,9 +12,6 @@ namespace vigenere
 class DecipherStrategy
 {
 public:
-    static constexpr char alphabet_begin = 'a';
-    static constexpr char alphabet_end = 'z';
-    static constexpr int alphabet_size = alphabet_end - alphabet_begin;
     // constructor
     DecipherStrategy(Key key, std::string &file);
     // destructor

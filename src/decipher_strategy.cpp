@@ -3,6 +3,8 @@
 #include <cctype>
 #include <iostream>
 
+#include "cipher_alphabet.h"
+
 namespace vigenere
 {
 DecipherStrategy::DecipherStrategy(Key key, std::string &file) :
