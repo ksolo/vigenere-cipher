@@ -75,7 +75,7 @@ char EncipherStrategy::shift(char letter)
 void EncipherStrategy::report()
 {
     std::lock_guard<std::mutex> lck(_mtx);
-    std::cout << "File: " << _input_filename << " has been enchiphered." << std::endl;
+    std::cout << "File: " << _input_filename << " has been enciphered." << std::endl;
     std::cout << "Characters Skipped: " << _skipped_characters_count << std::endl;
     std::cout << "Characters Passed Through: " << _passthrough_characters_count << std::endl;
     std::cout << "Characters Enciphered: " << _enciphered_characters_count << std::endl;

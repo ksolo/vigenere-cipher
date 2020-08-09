@@ -32,6 +32,6 @@ void DecipherCommand::DecipherFiles()
         ftr.wait();
     }
 
-    std::cout << "futures completed" << std::endl;
+    std::cout << "deciphering completed" << std::endl;
 }
 }

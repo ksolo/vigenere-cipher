@@ -32,6 +32,6 @@ void EncipherCommand::EncipherFiles()
         ftr.wait();
     }
 
-    std::cout << "futures completed" << std::endl;
+    std::cout << "enchiphering completed" << std::endl;
 }
 }

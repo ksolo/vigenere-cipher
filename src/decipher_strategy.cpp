@@ -11,25 +11,25 @@ DecipherStrategy::DecipherStrategy(Key key, std::string &file) :
     _input_file(file)
 {
     std::string output_filename(_input_filename);
-    output_filename.replace(output_filename.size() - 4, 4, ".enc.txt");
+    output_filename.replace(output_filename.size() - 4, 4, ".dec.txt");
 
     _output_file.open(output_filename, std::ios::out);
 };
 
-VigenereCipherStrategy::~VigenereCipherStrategy()
+DecipherStrategy::~DecipherStrategy()
 {
     _input_file.close();
     _output_file.close();
 }
 
-void VigenereCipherStrategy::Encipher()
+void DecipherStrategy::Decipher()
 {
     if (_input_file)
     {
         std::string line;
         while(getline(_input_file, line))
         {
-            encipher_line(line);
+            decipher_line(line);
         }
     } else {
         std::lock_guard<std::mutex> lck(_mtx);
@@ -39,45 +39,45 @@ void VigenereCipherStrategy::Encipher()
     report();
 }
 
-void VigenereCipherStrategy::encipher_line(const std::string &line)
+void DecipherStrategy::decipher_line(const std::string &line)
 {
-    std::string enciphered_line = "";
+    std::string deciphered_line = "";
     for(char letter : line)
     {
         letter = tolower(letter);
         if (isnumber(letter) || isspace(letter))
         {
             _passthrough_characters_count++;
-            enciphered_line += letter;
+            deciphered_line += letter;
         }
         else if (isalpha(letter))
         {
-            enciphered_line += shift(letter);
+            deciphered_line += unshift(letter);
         }
         else {
             _skipped_characters_count++;
         }
     }
-    _output_file << enciphered_line << std::endl;
+    _output_file << deciphered_line << std::endl;
 }
 
-char VigenereCipherStrategy::shift(char letter)
+char DecipherStrategy::unshift(char letter)
 {
     std::string normalized_key = _key.NormalizedKey();
-    int offset_position = _enciphered_characters_count++ % normalized_key.size();
+    int offset_position = _deciphered_characters_count++ % normalized_key.size();
     char offset_character = normalized_key.at(offset_position);
-    char shifted_char = tolower(letter) + (offset_character - alphabet_begin);
+    char unshifted_char = (tolower(letter) - offset_character) + alphabet_begin;
 
-    if (shifted_char > alphabet_end) return shifted_char - alphabet_size;
-    return shifted_char;
+    if (unshifted_char < alphabet_begin) return unshifted_char + alphabet_size;
+    return unshifted_char;
 }
 
-void VigenereCipherStrategy::report()
+void DecipherStrategy::report()
 {
     std::lock_guard<std::mutex> lck(_mtx);
-    std::cout << "File: " << _input_filename << " has been enchiphered." << std::endl;
+    std::cout << "File: " << _input_filename << " has been deciphered." << std::endl;
     std::cout << "Characters Skipped: " << _skipped_characters_count << std::endl;
     std::cout << "Characters Passed Through: " << _passthrough_characters_count << std::endl;
-    std::cout << "Characters Enciphered: " << _enciphered_characters_count << std::endl;
+    std::cout << "Characters Enciphered: " << _deciphered_characters_count << std::endl;
 }
 }
