@@ -7,10 +7,12 @@ set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 add_executable(vigenere
     src/main.cpp
     src/command_factory.cpp
+    src/decipher_command.cpp
+    src/decipher_strategy.cpp
     src/encipher_command.cpp
+    src/encipher_strategy.cpp
     src/help_command.cpp
     src/key.cpp
-    src/vigenere_cipher_strategy.cpp
 )
 
 target_include_directories(vigenere PUBLIC include)

@@ -1,11 +1,11 @@
-#include "vigenere_cipher_strategy.h"
+#include "decipher_strategy.h"
 
 #include <cctype>
 #include <iostream>
 
 namespace vigenere
 {
-VigenereCipherStrategy::VigenereCipherStrategy(Key key, std::string &file) :
+DecipherStrategy::DecipherStrategy(Key key, std::string &file) :
     _key(key),
     _input_filename(file),
     _input_file(file)

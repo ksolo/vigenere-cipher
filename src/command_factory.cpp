@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "command_factory.h"
+#include "decipher_command.h"
 #include "encipher_command.h"
 #include "help_command.h"
 
@@ -27,6 +28,7 @@ std::unique_ptr<Command> GetCommand(int argc, char *argv[])
         }
 
         if (command == encipher) { return std::make_unique<EncipherCommand>(key, files); }
+        if (command == decipher) { return std::make_unique<DecipherCommand>(key, files); }
     }
     return std::make_unique<HelpCommand>();
 }

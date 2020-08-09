@@ -1,29 +1,29 @@
-#include "encipher_command.h"
+#include "decipher_command.h"
 
 #include <future>
 #include <iostream>
 #include <thread>
 
-#include "encipher_strategy.h"
+#include "decipher_strategy.h"
 
 namespace vigenere
 {
-EncipherCommand::EncipherCommand(const std::string &key, std::vector<std::string> files): _key(key), _files(files) {}
+DecipherCommand::DecipherCommand(const std::string &key, std::vector<std::string> files): _key(key), _files(files) {}
 
-void EncipherCommand::Execute()
+void DecipherCommand::Execute()
 {
-    EncipherFiles();
+    DecipherFiles();
 }
 
-void EncipherCommand::EncipherFiles()
+void DecipherCommand::DecipherFiles()
 {
     std::vector<std::future<void>> futures;
     for (auto file : _files)
     {
 
         futures.emplace_back(std::async([&](std::string file){
-            EncipherStrategy cipher(_key, file);
-            cipher.Encipher();
+            DecipherStrategy cipher(_key, file);
+            cipher.Decipher();
         }, file));
     }
 
