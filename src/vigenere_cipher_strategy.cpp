@@ -1,5 +1,6 @@
 #include "vigenere_cipher_strategy.h"
 
+#include <cctype>
 #include <iostream>
 
 namespace vigenere
@@ -37,7 +38,35 @@ void VigenereCipherStrategy::Encipher()
 
 void VigenereCipherStrategy::encipher_line(const std::string &line)
 {
-    std::cout << line << std::endl;
-    _output_file << line << std::endl;
+    std::string enciphered_line = "";
+    for(char letter : line)
+    {
+        letter = tolower(letter);
+        if (isnumber(letter) || isspace(letter))
+        {
+            _passthrough_characters_count++;
+            enciphered_line += letter;
+        }
+        else if (isalpha(letter))
+        {
+            char shifted_char = shift(letter);
+            enciphered_line += shift(letter);
+        }
+        else {
+            _skipped_characters_count++;
+        }
+    }
+    _output_file << enciphered_line << std::endl;
+}
+
+char VigenereCipherStrategy::shift(char letter)
+{
+    std::string normalized_key = _key.NormalizedKey();
+    int offset_position = _enciphered_characters_count++ % normalized_key.size();
+    char offset_character = normalized_key.at(offset_position);
+    char shifted_char = tolower(letter) + (offset_character - alphabet_begin);
+
+    if (shifted_char > alphabet_end) return shifted_char - alphabet_size;
+    return shifted_char;
 }
 }

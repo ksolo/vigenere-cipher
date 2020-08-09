@@ -12,6 +12,9 @@ namespace vigenere
 class VigenereCipherStrategy
 {
 public:
+    static constexpr char alphabet_begin = 'a';
+    static constexpr char alphabet_end = 'z';
+    static constexpr int alphabet_size = alphabet_end - alphabet_begin;
     // constructor
     VigenereCipherStrategy(Key key, std::string &file);
     // destructor
@@ -31,6 +34,8 @@ private:
     std::fstream _output_file;
 
     void encipher_line(const std::string &line);
+    char shift(char letter);
+    // TODO: use mutex to protext
 };
 }
 #endif
