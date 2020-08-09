@@ -23,6 +23,7 @@ void EncipherCommand::EncipherFiles()
 
         futures.emplace_back(std::async([&](std::string file){
             VigenereCipherStrategy cipher(_key, file);
+            cipher.encipher();
         }, file));
     }
 

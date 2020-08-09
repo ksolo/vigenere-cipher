@@ -1,6 +1,7 @@
 #ifndef VIGENERE_CIPHER_STRATEGY_H
 #define VIGENERE_CIPHER_STRATEGY_H
 
+#include <fstream>
 #include <mutex>
 #include <string>
 
@@ -13,6 +14,11 @@ class VigenereCipherStrategy
 public:
     // constructor
     VigenereCipherStrategy(Key key, std::string &file);
+    // destructor
+    ~VigenereCipherStrategy();
+
+    // methods
+    void encipher();
 
 private:
     int _enciphered_characters_count {0};
@@ -20,7 +26,9 @@ private:
     int _skipped_characters_count {0};
 
     Key _key;
-    std::string &_file;
+    std::string &_input_filename;
+    std::fstream _input_file;
+    std::fstream _output_file;
 };
 }
 #endif
