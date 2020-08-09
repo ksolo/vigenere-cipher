@@ -18,7 +18,7 @@ public:
     ~VigenereCipherStrategy();
 
     // methods
-    void encipher();
+    void Encipher();
 
 private:
     int _enciphered_characters_count {0};
@@ -29,6 +29,8 @@ private:
     std::string &_input_filename;
     std::fstream _input_file;
     std::fstream _output_file;
+
+    void encipher_line(const std::string &line);
 };
 }
 #endif
