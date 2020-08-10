@@ -68,10 +68,11 @@ char EncipherStrategy::shift(char letter)
     std::string normalized_key = _key.NormalizedKey();
     int offset_position = _enciphered_characters_count++ % normalized_key.size();
     char offset_character = normalized_key.at(offset_position);
-    char shifted_char = tolower(letter) + (offset_character - alphabet_begin);
 
-    if (shifted_char > alphabet_end) return shifted_char - alphabet_size;
-    return shifted_char;
+    int offset_from_base = offset_character - alphabet_begin;
+    int letter_from_base = tolower(letter) - alphabet_begin;
+
+    return alphabet_begin + ((letter_from_base + offset_from_base) % alphabet_size);
 }
 
 void EncipherStrategy::report()

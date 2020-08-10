@@ -68,10 +68,16 @@ char DecipherStrategy::unshift(char letter)
     std::string normalized_key = _key.NormalizedKey();
     int offset_position = _deciphered_characters_count++ % normalized_key.size();
     char offset_character = normalized_key.at(offset_position);
-    char unshifted_char = (tolower(letter) - offset_character) + alphabet_begin;
 
-    if (unshifted_char < alphabet_begin) return unshifted_char + alphabet_size;
-    return unshifted_char;
+    int offset_from_base = offset_character - alphabet_begin;
+    int letter_from_base = tolower(letter) - alphabet_begin;
+
+    int diff = offset_from_base - letter_from_base;
+    if (diff > 0)
+    {
+        return alphabet_end - diff + 1;
+    }
+    return alphabet_begin - diff;
 }
 
 void DecipherStrategy::report()
