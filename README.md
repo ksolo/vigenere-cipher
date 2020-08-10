@@ -56,3 +56,58 @@ encipher command if the key itself contains spaces, the key must be wrapped in q
 ```sh
 $ ./vigenere decipher "this is my key" encryptedfile.txt
 ```
+
+## Full Run Through
+
+The application includes a `samples` directory that contains 2 files (`one.txt` and `two.txt`).
+To encipher or encrypt them use:
+
+```sh
+# make sure you are in the build directory
+$ cd build
+$ ./vigenere encipher abcdefg ../samples/one.text ../samples/two.txt
+```
+
+This will run the program, each file in its own thread. After completion a report will show
+indicating how many characters were altered. Due to scope constraints there are many edge
+cases not covered and many items are skipped such as punctuation.
+
+The new files with the encrypted information will be in `samples/one.enc.txt` and `samples/two.enc.txt`
+
+To decipher or decrypt them you will now use:
+
+```sh
+# make sure you are in the build directory
+$ cd build
+$ ./vigenere decipher abcdefg ../samples/one.enc.txt ../samples/two.enc.txt
+```
+
+This will decrypt them and save the resulting files in `samples/one.enc.dec.txt` and `samples/two.enc.dec.txt`
+
+The text of these last files should contain the original message (all lowercase) and may have a few items
+altered such as punctuation since those were not handled.
+
+## Rubric Items
+
+### Loops, Functions, IO
+
+I used `fstream` for reading and writing files, including creating new files for output and altering
+the names to differentiate input from output.
+
+For loops and other functions are throughout the code.
+
+### OOP
+
+A shallow hierarchy of `Command` objects was used for creating the `Execute` interface
+among the `EncipherCommand`, `DecipherCommand`, and `HelpCommand`.
+
+The Strategy classes contain the primary algorithm for shifting/unshifting characters for
+the encryption.
+
+### Memory
+
+There is a unique_ptr used by the `CommandFactory` and returned in `main.cpp`
+
+### Concurrency
+
+Each file provided as input is enciphered/deciphered in its own thread.
