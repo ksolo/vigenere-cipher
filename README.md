@@ -6,7 +6,7 @@ key for shifting the characters. For more information on these ciphers checkout 
 
 ## Building
 
-This project uses cmake 3.17.3 which can be obtained from the [cmake downloads page](https://cmake.org/download/).
+This project uses cmake 3.7 which can be obtained from the [cmake downloads page](https://cmake.org/download/).
 Once this is installed make a build directory and navigate to the new directory.
 
 ```sh
