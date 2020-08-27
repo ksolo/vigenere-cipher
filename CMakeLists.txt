@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.17.3)
+cmake_minimum_required(VERSION 3.16.3)
 
 project(vigenere_cipher)
 set(CMAKE_CXX_STANDARD 17)
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
+
+find_package(Threads REQUIRED)
 
 add_executable(vigenere
     src/main.cpp
@@ -16,3 +18,4 @@ add_executable(vigenere
 )
 
 target_include_directories(vigenere PUBLIC include)
+target_link_libraries(vigenere ${CMAKE_THREAD_LIBS_INIT})

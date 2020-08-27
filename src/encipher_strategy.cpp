@@ -47,7 +47,7 @@ void EncipherStrategy::encipher_line(const std::string &line)
     for(char letter : line)
     {
         letter = tolower(letter);
-        if (isnumber(letter) || isspace(letter))
+        if (isdigit(letter) || isspace(letter))
         {
             _passthrough_characters_count++;
             enciphered_line += letter;

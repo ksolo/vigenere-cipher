@@ -47,7 +47,7 @@ void DecipherStrategy::decipher_line(const std::string &line)
     for(char letter : line)
     {
         letter = tolower(letter);
-        if (isnumber(letter) || isspace(letter))
+        if (isdigit(letter) || isspace(letter))
         {
             _passthrough_characters_count++;
             deciphered_line += letter;
@@ -72,12 +72,7 @@ char DecipherStrategy::unshift(char letter)
     int offset_from_base = offset_character - alphabet_begin;
     int letter_from_base = tolower(letter) - alphabet_begin;
 
-    int diff = offset_from_base - letter_from_base;
-    if (diff > 0)
-    {
-        return alphabet_end - diff + 1;
-    }
-    return alphabet_begin - diff;
+    return alphabet_begin + ((letter_from_base - offset_from_base + alphabet_size) % alphabet_size);
 }
 
 void DecipherStrategy::report()
